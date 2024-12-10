@@ -4,8 +4,8 @@ CREATE DATABASE practica5;
 USE practica5;
 
 CREATE TABLE aerolineas(
-  id_aerolinea INT UNIQUE PRIMARY KEY,
-  nombre VARCHAR(20),
+  id_aerolinea INT PRIMARY KEY,
+  nombre VARCHAR(20) UNIQUE,
   pais VARCHAR(20),
   telefono CHAR(9)
 ) ENGINE=InnoDB;
