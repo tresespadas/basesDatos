@@ -33,31 +33,46 @@ CREATE TABLE coches(
 
 INSERT INTO coches (modelo, potencia, fecha, precio, disponible)
 VALUES
-('afent', 100, '1999-12-12', 10000.00, TRUE), -- Voy por las fechas
+('afent', 100, '1999-12-12', 10000.00, TRUE), 
 ('clio', 70, '1999-12-12', 10000.00, TRUE),
 ('fiat brava', 90, '1999-12-12', 10000.00, FALSE),
 ('fiat punto', 70, '1995-09-09', 10000.00, TRUE),
-('for focus', 89, '1995-09-09', 10000.00, TRUE),
-('Kia Rio', 90, '1995-09-09', 10000.00, TRUE),
-('laguna', 200,  '1995-09-09', 10000.00, TRUE),
-('marbella', 65, '1995-09-09', 10000.00, TRUE),
-('megane', 100, '1995-09-09', 10000.00, TRUE),
-('Mercedes 300', 150, '1995-09-09', 10000.00, TRUE),
-('Mercedes 500', 200, '1995-09-09', 10000.00, TRUE),
-('opel kadet', 89, '1995-09-09', 10000.00, TRUE),
-('r-18', 80, '1995-09-09', 10000.00, TRUE),
-('Santa fe', 150, '1995-09-09', 10000.00, TRUE),
-('Santi', 200, '1995-09-09', 10000.00, TRUE),
-('smart', 60, '1995-09-09', 10000.00, TRUE),
-('Space', 200, '1995-09-09', 10000.00, TRUE),
-('toyota corola', 100, '1995-09-09', 10000.00, TRUE);
+('for focus', 89, '2001-01-01', 10000.00, TRUE),
+('Kia Rio', 90, '2005-01-03', 10000.00, TRUE),
+('laguna', 200,  '2004-03-01', 10000.00, FALSE),
+('marbella', 65, '1996-01-05', 10000.00, TRUE),
+('megane', 100, '2003-03-01', 10000.00, TRUE),
+('Mercedes 300', 150, '2005-02-10', 10000.00, TRUE),
+('Mercedes 500', 200, '1999-12-12', 10000.00, TRUE),
+('opel kadet', 89, '1999-12-12', 10000.00, TRUE),
+('r-18', 80, '1995-02-10', 10000.00, TRUE),
+('Santa fe', 150, '1999-12-12', 10000.00, TRUE),
+('Santia', 200, '2000-02-01', 10000.00, TRUE),
+('smart', 60, '2002-01-02', 10000.00, FALSE),
+('Space', 200, '1999-12-12', 10000.00, TRUE),
+('toyota corola', 100, '1999-12-12', 10000.00, TRUE);
 
 CREATE TABLE productos(
-  codigo_prod INT PRIMARY KEY,
+  codigo_prod INT, -- Creía que codigo_prod era PK
   mes VARCHAR(10),
   ingresos INT
 ) ENGINE=InnoDB;
 
+INSERT INTO productos (codigo_prod, mes, ingresos)
+VALUES
+(1, 'enero', 100),
+(1, 'enero', 400),
+(1, 'abril', 900),
+(4, 'enero', 2000),
+(4, 'febrero', 1200),
+(7, 'marzo', 230),
+(7, 'mayo', 500),
+(7, 'mayo', 600),
+(7, 'abril', 234),
+(7, 'marzo', 1000),
+(8, 'enero', 600),
+(8, 'enero', 1290),
+(9, 'marzo', 2400);
 
 SHOW TABLES;
 DESCRIBE clientes;
@@ -66,3 +81,4 @@ DESCRIBE productos;
 
 SELECT * FROM clientes;
 SELECT modelo, potencia, DATE_FORMAT(fecha, '%d/%m/%y') AS fecha, precio, disponible FROM coches;
+SELECT * FROM productos;
