@@ -27,7 +27,7 @@ CREATE TABLE coches(
   modelo VARCHAR(15) PRIMARY KEY, -- Duda PK?
   potencia CHAR(3),
   fecha DATE,
-  precio DECIMAL(7,2), -- Creo que se podía poner DEFAULT 10000.00
+  precio DECIMAL(7,2) DEFAULT 10000.00, -- Y luego cómo se escribe en el INSERT?
   disponible BOOLEAN
 ) ENGINE=InnoDB;
 
