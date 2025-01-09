@@ -1,27 +1,28 @@
+-- IMPORTANTE: CAMBIAR EL ORDEN DE LA CREACION DE TABLAS POR LA CULPA DE FOREIGN KEY --
 CREATE DATABASE Practica4; 
 USE Practica4;
 
 CREATE TABLE Marcas (
-	cifm int,
+	cifm int PRIMARY KEY,
 	Nombre varchar(50),
 	Ciudad varchar(50)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Clientes (
-	dni int,
+	dni int PRIMARY KEY,
 	Nombre varchar(50),
 	Apellido varchar(50),
 	Ciudad varchar(50)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Concesionarios (
-	cifc int,
+	cifc int PRIMARY KEY,
 	nombre varchar(50),
 	Ciudad varchar(50)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Coches (
-	codcoche int,
+	codcoche int PRIMARY KEY,
 	Nombre varchar(40),
 	modelo varchar(40)
 ) ENGINE=InnoDB;
@@ -30,18 +31,39 @@ CREATE TABLE Ventas (
 	cifc int,
 	dni int,
 	codcoche int,
-	color varchar(40)
+	color varchar(40),
+  FOREIGN KEY (cifc) REFERENCES Concesionarios (cifc)
+  ON UPDATE CASCADE
+  ON UPDATE CASCADE,
+  FOREIGN KEY (dni) REFERENCES Clientes (dni)
+  ON UPDATE CASCADE
+  ON UPDATE CASCADE,
+  FOREIGN KEY (codcoche) REFERENCES Coches (codcoche)
+  ON UPDATE CASCADE
+  ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE Marco (
 	cifm int,
-	codcoche int
+	codcoche int,
+  FOREIGN KEY (cifm) REFERENCES Marcas (cifm)
+  ON UPDATE CASCADE
+  ON UPDATE CASCADE,
+  FOREIGN KEY (codcoche) REFERENCES Coches (codcoche)
+  ON UPDATE CASCADE
+  ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE Distribucion (
 	cifc int,
 	codcoche int,
 	cantidad int	
+  FOREIGN KEY (cifc) REFERENCES Concesionarios (cifc)
+  ON UPDATE CASCADE
+  ON UPDATE CASCADE,
+  FOREIGN KEY (dni) REFERENCES Clientes (dni)
+  ON UPDATE CASCADE
+  ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
 
