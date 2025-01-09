@@ -59,6 +59,6 @@ WHERE potencia=90 OR potencia=100 OR potencia=200
 ORDER BY potencia DESC;
 
 /* Apartado 12 */
-SELECT modelo, potencia, fecha, precio, precio*1.21 AS precio_con_iva, disponible 
+SELECT modelo, potencia, fecha, precio, precio*0.21 AS iva, disponible 
 FROM coches 
 ORDER BY precio ASC;
