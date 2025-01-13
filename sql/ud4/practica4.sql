@@ -1,4 +1,5 @@
 -- IMPORTANTE: CAMBIAR EL ORDEN DE LA CREACION DE TABLAS POR LA CULPA DE FOREIGN KEY --
+DROP DATABASE IF EXISTS Practica4;
 CREATE DATABASE Practica4; 
 USE Practica4;
 
@@ -32,38 +33,41 @@ CREATE TABLE Ventas (
 	dni int,
 	codcoche int,
 	color varchar(40),
+  PRIMARY KEY (cifc, dni, codcoche),
   FOREIGN KEY (cifc) REFERENCES Concesionarios (cifc)
   ON UPDATE CASCADE
-  ON UPDATE CASCADE,
+  ON DELETE CASCADE,
   FOREIGN KEY (dni) REFERENCES Clientes (dni)
   ON UPDATE CASCADE
-  ON UPDATE CASCADE,
+  ON DELETE CASCADE,
   FOREIGN KEY (codcoche) REFERENCES Coches (codcoche)
   ON UPDATE CASCADE
-  ON UPDATE CASCADE
+  ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE Marco (
 	cifm int,
 	codcoche int,
+  PRIMARY KEY (cifm, codcoche),
   FOREIGN KEY (cifm) REFERENCES Marcas (cifm)
   ON UPDATE CASCADE
-  ON UPDATE CASCADE,
+  ON DELETE CASCADE,
   FOREIGN KEY (codcoche) REFERENCES Coches (codcoche)
   ON UPDATE CASCADE
-  ON UPDATE CASCADE
+  ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE Distribucion (
 	cifc int,
 	codcoche int,
-	cantidad int	
+	cantidad int,	
+  PRIMARY KEY (cifc, codcoche),
   FOREIGN KEY (cifc) REFERENCES Concesionarios (cifc)
   ON UPDATE CASCADE
-  ON UPDATE CASCADE,
-  FOREIGN KEY (dni) REFERENCES Clientes (dni)
+  ON DELETE CASCADE,
+  FOREIGN KEY (codcoche) REFERENCES Coches (codcoche)
   ON UPDATE CASCADE
-  ON UPDATE CASCADE
+  ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 
