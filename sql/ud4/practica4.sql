@@ -154,3 +154,85 @@ INSERT INTO Distribucion (cifc, codcoche, cantidad) VALUES ("0004", "0014", "5")
 INSERT INTO Distribucion (cifc, codcoche, cantidad) VALUES ("0005", "0015", "10");
 INSERT INTO Distribucion (cifc, codcoche, cantidad) VALUES ("0005", "0016", "20");
 INSERT INTO Distribucion (cifc, codcoche, cantidad) VALUES ("0005", "0017", "8");
+
+-- Apartado 4
+SELECT *
+FROM Concesionarios;
+
+-- Apartado 5
+SELECT *
+FROM Clientes
+WHERE ciudad='Madrid';
+
+-- Apartado 6
+SELECT nombre
+FROM Marcas
+ORDER BY nombre ASC;
+
+-- Apartado 7
+SELECT cifc
+FROM Distribucion
+WHERE cantidad>18;
+
+-- Apartado 8
+SELECT cifc
+FROM Distribucion
+WHERE cantidad BETWEEN 10 AND 18;
+
+-- Apartado 9 - Duda?
+SELECT cifc
+FROM Distribucion
+WHERE cantidad>10 OR cantidad<5;
+
+-- Apartado 10
+
+-- Apartado 14
+SELECT codcoche
+FROM Coches
+WHERE nombre LIKE 'c%';
+
+-- Apartado 15
+SELECT codcoche
+FROM Coches
+WHERE nombre NOT LIKE '%a%';
+
+-- Apartado 16
+SELECT COUNT(*)
+from Marcas
+WHERE ciudad = 'Madrid';
+
+-- Apartado 17
+SELECT AVG(cantidad)
+FROM Distribucion;
+
+-- Apartado 18
+SELECT MAX(dni)
+FROM Clientes
+WHERE ciudad = 'Madrid';
+
+-- Apartado 19
+SELECT MIN(dni)
+from Ventas
+WHERE color = 'Blanco';
+
+-- Apartado 20
+SELECT DISTINCT cifc
+FROM Distribucion
+WHERE cantidad IS NOT NULL;
+
+-- Apartado 21
+SELECT cifm, nombre
+FROM Marcas
+WHERE ciudad LIKE '_i%';
+
+-- Apartado 22
+
+-- Apartado 29
+SELECT cifc, AVG(cantidad) AS media_stock
+FROM Distribucion
+GROUP BY cifc;
+
+-- Apartado 29
+SELECT cifc, SUM(cantidad) AS total_stock
+FROM Distribucion
+GROUP BY cifc;
