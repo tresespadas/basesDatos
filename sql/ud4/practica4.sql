@@ -232,7 +232,7 @@ SELECT cifc, AVG(cantidad) AS media_stock
 FROM Distribucion
 GROUP BY cifc;
 
--- Apartado 29
+-- Apartado 30
 SELECT cifc, SUM(cantidad) AS total_stock
 FROM Distribucion
 GROUP BY cifc;
