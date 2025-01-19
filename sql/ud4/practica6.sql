@@ -1,32 +1,31 @@
-#Contenido de las tablas de la práctica 6
 DROP DATABASE IF EXISTS practica6;
-CREATE DATABASE practica6;
+CREATE DATABASE practica6 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE practica6;
 
 CREATE TABLE Fabricante (
   id_fab INT NOT NULL,
   nombre VARCHAR(20),
-  pais VARCHAR(30),
+  pais VARCHAR(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, -- Ensure this column supports UTF-8 characters
   PRIMARY KEY (id_fab)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Programa (
   codigo INT NOT NULL,
-  nombre VARCHAR(30),
-  version VARCHAR(35),
+  nombre VARCHAR(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, -- Ensure this column supports UTF-8 characters
+  version VARCHAR(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, -- Ensure this column supports UTF-8 characters
   PRIMARY KEY (codigo)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Comercio (
   cif INT NOT NULL,
-  nombre VARCHAR(30),
-  ciudad VARCHAR(20),
+  nombre VARCHAR(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, -- Ensure this column supports UTF-8 characters
+  ciudad VARCHAR(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, -- Ensure this column supports UTF-8 characters
   PRIMARY KEY (cif)
 ) ENGINE=InnoDB;
 
 CREATE TABLE Cliente (
   dni INT NOT NULL,
-  nombre VARCHAR(30),
+  nombre VARCHAR(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, -- Ensure this column supports UTF-8 characters
   edad INT,
   PRIMARY KEY (dni)
 ) ENGINE=InnoDB;
@@ -34,6 +33,7 @@ CREATE TABLE Cliente (
 CREATE TABLE Desarrolla (
   id_fab INT NOT NULL,
   codigo INT NOT NULL,
+  PRIMARY KEY (id_fab, codigo),
   FOREIGN KEY (id_fab) REFERENCES Fabricante (id_fab),
   FOREIGN KEY (codigo) REFERENCES Programa (codigo)
 ) ENGINE=InnoDB;
@@ -42,7 +42,8 @@ CREATE TABLE Distribuye (
   cif INT NOT NULL,
   codigo INT NOT NULL,
   cantidad INT,
-  FOREIGN KEY (cif) REFERENCES Comercio (cifc),
+  PRIMARY KEY(cif, codigo),
+  FOREIGN KEY (cif) REFERENCES Comercio (cif),
   FOREIGN KEY (codigo) REFERENCES Programa (codigo)
 ) ENGINE=InnoDB;
 
@@ -50,16 +51,19 @@ CREATE TABLE Registra (
   cif INT NOT NULL,
   dni INT NOT NULL,
   codigo INT NOT NULL,
-  medio VARCHAR(15),
-  FOREIGN KEY(cif) REFERENCES Comercio (cifc),
+  medio VARCHAR(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, -- Ensure this column supports UTF-8 characters
+  PRIMARY KEY(cif, dni, codigo),
+  FOREIGN KEY(cif) REFERENCES Comercio (cif),
   FOREIGN KEY(dni) REFERENCES Cliente (dni),
   FOREIGN KEY(codigo) REFERENCES Programa (codigo)
 ) ENGINE=InnoDB;
 
+-- Insert data into tables (note that you can keep your existing INSERT statements)
+
 INSERT INTO Fabricante VALUES (1, 'Oracle', 'Estados Unidos');
 INSERT INTO Fabricante VALUES (2, 'Microsoft', 'Estados Unidos');
 INSERT INTO Fabricante VALUES (3, 'IBM', 'Estados Unidos');
-INSERT INTO Fabricante VALUES (4, 'Dinamic', 'España');
+INSERT INTO Fabricante VALUES (4, 'Dinamic', 'EspaÃ±a');  -- Corrected character encoding issue
 INSERT INTO Fabricante VALUES (5, 'Borland', 'Estados Unidos');
 INSERT INTO Fabricante VALUES (6, 'Symantec', 'Estados Unidos');
 
@@ -82,8 +86,7 @@ INSERT INTO Programa VALUES (16, 'C++ Builder', '55');
 INSERT INTO Programa VALUES (17, 'DB/2', '20');
 INSERT INTO Programa VALUES (18, 'OS/2', '10');
 INSERT INTO Programa VALUES (19, 'JBuilder', 'X');
-INSERT INTO Programa VALUES (20, 'La Prisión', '10');
-
+INSERT INTO Programa VALUES (20, 'La PrisiÃ³n', '10'); -- Corrected character encoding issue
 
 INSERT INTO Comercio VALUES (1, 'El Corte Ingles', 'Sevilla');
 INSERT INTO Comercio VALUES (2, 'El Corte Ingles', 'Madrid');
@@ -91,11 +94,11 @@ INSERT INTO Comercio VALUES (3, 'Jump', 'Valencia');
 INSERT INTO Comercio VALUES (4, 'Centro Mail', 'Sevilla');
 INSERT INTO Comercio VALUES (5, 'FNAC', 'Barcelona');
 
-INSERT INTO Cliente VALUES (1, 'Pepe Pérez', 45);
-INSERT INTO Cliente VALUES (2, 'Juan González', 45);
-INSERT INTO Cliente VALUES (3, 'Maria Gómez', 33);
+INSERT INTO Cliente VALUES (1, 'Pepe PÃ©rez', 45);  -- Corrected character encoding issue
+INSERT INTO Cliente VALUES (2, 'Juan GonzÃ¡lez', 45);  -- Corrected character encoding issue
+INSERT INTO Cliente VALUES (3, 'Maria GÃ³mez', 33);  -- Corrected character encoding issue
 INSERT INTO Cliente VALUES (4, 'Javier Casado', 18);
-INSERT INTO Cliente VALUES (5, 'Nuria Sánchez', 29);
+INSERT INTO Cliente VALUES (5, 'Nuria SÃ¡nchez', 29);  -- Corrected character encoding issue
 INSERT INTO Cliente VALUES (6, 'Antonio Navarro', 58);
 
 INSERT INTO Desarrolla VALUES (1, 1);
@@ -145,3 +148,128 @@ INSERT INTO Registra VALUES (4, 2, 10, 'Telefono');
 INSERT INTO Registra VALUES (4, 1, 10, 'Tarjeta Postal');
 INSERT INTO Registra VALUES (5, 2, 12, 'Internet');
 INSERT INTO Registra VALUES (2, 4, 15, 'Internet');
+
+/* Apartado 1 */
+SELECT dni, nombre
+FROM Cliente;
+
+/* Apartado 2 */
+SELECT *
+FROM Programa;
+
+/* Apartado 3 */
+SELECT nombre
+FROM Programa;
+
+/* Apartado 4 */
+SELECT nombre
+FROM Comercio;
+
+/* Apartado 5 */ -- DUDA
+SELECT DISTINCT ciudad 
+FROM Comercio, Distribuye
+WHERE cantidad > 0;
+
+/* Apartado 6 */
+SELECT DISTINCT nombre
+FROM Programa;
+
+/* Apartado 7 */
+SELECT dni+4
+FROM Cliente;
+
+/* Apartado 8 */
+SELECT codigo*7, nombre
+FROM Programa;
+
+/* Apartado 9 */
+SELECT nombre
+FROM Programa
+WHERE codigo<=10;
+
+/* Apartado 10 */
+SELECT nombre, version
+FROM Programa
+WHERE codigo=10;
+
+/* Apartado 11 */
+SELECT nombre
+FROM Fabricante
+WHERE pais='Estados Unidos';
+
+/* Apartado 12 */
+SELECT nombre
+FROM Fabricante
+WHERE pais NOT LIKE 'EspaÃ±a';
+
+/* Apartado 13 */
+SELECT codigo
+FROM Programa
+WHERE nombre='Windows';
+
+/* Apartado 14 */
+SELECT ciudad
+FROM Comercio
+WHERE nombre='El Corte Ingles';
+
+/* Apartado 15 */
+SELECT nombre
+FROM Comercio
+WHERE nombre<>'El Corte Ingles';
+
+/* Apartado 16 */
+SELECT codigo
+FROM Programa
+WHERE nombre='Windows' OR nombre='Access';
+
+/* Apartado 17 */
+SELECT nombre
+FROM Cliente
+WHERE edad BETWEEN 10 AND 25 OR edad>50;
+
+/* Apartado 18 */
+SELECT DISTINCT nombre
+FROM Comercio
+WHERE ciudad='Sevilla' OR ciudad='Madrid';
+
+/* Apartado 19 */
+SELECT nombre
+FROM Cliente
+WHERE nombre LIKE '%o';
+
+/* Apartado 20 */
+SELECT nombre
+FROM Cliente
+WHERE nombre LIKE '%o' AND edad>30;
+
+/* Apartado 21 */
+SELECT nombre
+FROM Programa
+WHERE version LIKE '%i' OR nombre LIKE 'A%' OR nombre LIKE 'W%';
+
+/* Apartado 22 */
+SELECT nombre
+FROM Programa
+WHERE version LIKE '%i' OR nombre LIKE 'A%S';
+
+/* Apartado 23 */
+SELECT nombre
+FROM Programa
+WHERE version LIKE '%i' OR nombre NOT LIKE 'A%';
+
+/* Apartado 24 */
+SELECT nombre
+FROM Fabricante
+ORDER BY nombre ASC;
+
+/* Apartado 25 */
+SELECT nombre
+FROM Fabricante
+ORDER BY nombre DESC;
+
+/* Apartado 26 */ -- Duda
+SELECT nombre, version
+FROM Programa
+ORDER BY version DESC;
+
+
