@@ -226,6 +226,25 @@ FROM Marcas
 WHERE ciudad LIKE '_i%';
 
 -- Apartado 22
+SELECT DISTINCT Ventas.dni
+FROM Ventas
+JOIN Concesionarios
+ON (Concesionarios.cifc=Ventas.cifc)
+WHERE Concesionarios.ciudad='Madrid';
+
+-- Apartado 23
+SELECT Ventas.color
+FROM Ventas
+JOIN Concesionarios
+ON (Ventas.cifc=Concesionarios.cifc)
+WHERE Concesionarios.nombre='acar';
+
+-- Apartado 24
+SELECT Ventas.codcoche
+FROM Ventas
+JOIN Concesionarios
+ON (Ventas.cifc=Concesionarios.cifc)
+WHERE Concesionarios.ciudad='Madrid';
 
 -- Apartado 29
 SELECT cifc, AVG(cantidad) AS media_stock
