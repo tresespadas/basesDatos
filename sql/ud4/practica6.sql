@@ -165,10 +165,9 @@ FROM Programa;
 SELECT nombre
 FROM Comercio;
 
-/* Apartado 5 */ -- DUDA
+/* Apartado 5 */
 SELECT DISTINCT ciudad 
-FROM Comercio, Distribuye
-WHERE cantidad > 0;
+FROM Comercio;
 
 /* Apartado 6 */
 SELECT DISTINCT nombre
@@ -183,22 +182,22 @@ SELECT codigo*7, nombre
 FROM Programa;
 
 /* Apartado 9 */
-SELECT nombre
+SELECT *
 FROM Programa
 WHERE codigo<=10;
 
 /* Apartado 10 */
-SELECT nombre, version
+SELECT *
 FROM Programa
-WHERE codigo=10;
+WHERE codigo=11;
 
 /* Apartado 11 */
-SELECT nombre
+SELECT *
 FROM Fabricante
 WHERE pais='Estados Unidos';
 
 /* Apartado 12 */
-SELECT nombre
+SELECT *
 FROM Fabricante
 WHERE pais NOT LIKE 'España';
 
@@ -213,7 +212,7 @@ FROM Comercio
 WHERE nombre='El Corte Ingles';
 
 /* Apartado 15 */
-SELECT nombre
+SELECT *
 FROM Comercio
 WHERE nombre<>'El Corte Ingles';
 
@@ -255,19 +254,19 @@ WHERE version LIKE '%i' OR nombre LIKE 'A%S';
 /* Apartado 23 */
 SELECT nombre
 FROM Programa
-WHERE version LIKE '%i' OR nombre NOT LIKE 'A%';
+WHERE version LIKE '%i' AND nombre NOT LIKE 'A%';
 
 /* Apartado 24 */
-SELECT nombre
+SELECT *
 FROM Fabricante
 ORDER BY nombre ASC;
 
 /* Apartado 25 */
-SELECT nombre
+SELECT *
 FROM Fabricante
 ORDER BY nombre DESC;
 
-/* Apartado 26 */ -- Duda
+/* Apartado 26 */
 SELECT nombre, version
 FROM Programa
 ORDER BY version DESC;
