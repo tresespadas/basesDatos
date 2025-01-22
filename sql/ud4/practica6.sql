@@ -271,4 +271,119 @@ SELECT nombre, version
 FROM Programa
 ORDER BY version DESC;
 
+/* Apartado 27 */
+SELECT Programa.codigo, Programa.nombre
+FROM Desarrolla
+JOIN Fabricante
+ON (Fabricante.id_fab=Desarrolla.id_fab)
+JOIN Programa
+ON (Programa.codigo=Desarrolla.codigo)
+WHERE Fabricante.nombre='Oracle';
 
+/* Apartado 28 */
+SELECT Comercio.nombre
+FROM Distribuye
+JOIN Comercio
+ON (Comercio.cif=Distribuye.cif)
+JOIN Programa
+ON (Programa.codigo=Distribuye.codigo)
+WHERE Programa.nombre='Windows';
+
+/* Apartado 29 */ 
+SELECT Programa.nombre, Distribuye.cantidad
+FROM Distribuye
+JOIN Comercio
+ON (Distribuye.cif=Comercio.cif)
+JOIN Programa
+ON (Programa.codigo=Distribuye.codigo)
+WHERE Comercio.nombre='El Corte Ingles' AND Comercio.ciudad='Madrid';
+
+/* Apartado 30 */
+SELECT Fabricante.nombre
+FROM Desarrolla
+JOIN Fabricante
+ON (Fabricante.id_fab=Desarrolla.id_fab)
+JOIN Programa
+ON (Programa.codigo=Desarrolla.codigo)
+WHERE Programa.nombre='Freddy Hardest';
+
+/* Apartado 31 */
+SELECT Programa.nombre, Programa.version
+FROM Registra
+JOIN Programa
+ON (Registra.codigo=Programa.codigo)
+WHERE Registra.medio='Internet';
+
+/* Apartado 32 */
+SELECT Cliente.nombre
+FROM Registra
+JOIN Cliente
+ON (Registra.dni=Cliente.dni)
+WHERE Registra.medio='Internet';
+
+/* Apartado 33 */
+SELECT Registra.medio
+FROM Registra
+JOIN Cliente
+ON (Cliente.dni=Registra.dni)
+WHERE Cliente.nombre='Pepe Pérez';
+
+/* Apartado 34 */
+SELECT Cliente.dni
+FROM Registra
+JOIN Cliente
+ON (Registra.dni=Cliente.dni)
+WHERE Registra.medio='Internet';
+
+/* Apartado 35 */
+SELECT Programa.nombre, Programa.version
+FROM Registra
+JOIN Programa
+ON (Registra.codigo=Programa.codigo)
+WHERE Registra.medio='Tarjeta Postal';
+
+/* Apartado 36 */
+SELECT Comercio.ciudad
+FROM Distribuye
+JOIN Comercio
+ON (Distribuye.cif=Comercio.cif)
+JOIN Registra
+ON (Registra.codigo=Distribuye.codigo)
+WHERE Registra.medio='Internet';
+
+/* Apartado 37 */
+SELECT Cliente.nombre, Programa.nombre
+FROM Registra
+JOIN Cliente
+ON (Registra.dni=Cliente.dni)
+JOIN Programa
+ON (Registra.codigo=Programa.codigo)
+WHERE Registra.medio='Internet';
+
+/* Apartado 38 */
+SELECT Cliente.nombre, Programa.nombre, Registra.medio, Comercio.nombre
+FROM Registra
+JOIN Cliente
+ON (Registra.dni=Cliente.dni)
+JOIN Programa
+ON (Registra.codigo=Programa.codigo)
+JOIN Comercio
+ON (Registra.cif=Comercio.cif);
+
+/* Apartado 39 */ -- Duda
+SELECT Comercio.ciudad
+FROM Distribuye
+JOIN Comercio
+ON (Distribuye.cif=Comercio.cif)
+JOIN Desarrolla
+ON (Distribuye.codigo=Desarrolla.codigo)
+WHERE Desarrolla.id_fab=1;
+
+/* Apartado 40 */
+SELECT Cliente.nombre
+FROM Registra
+JOIN Programa
+ON (Registra.codigo=Programa.codigo)
+JOIN Cliente
+ON (Registra.dni=Cliente.dni)
+WHERE Programa.nombre='Access' AND Programa.version='XP';
