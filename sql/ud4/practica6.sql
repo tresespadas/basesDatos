@@ -371,7 +371,7 @@ JOIN Comercio
 ON (Registra.cif=Comercio.cif);
 
 /* Apartado 39 */ -- Duda
-SELECT Comercio.ciudad
+SELECT DISTINCT Comercio.ciudad
 FROM Distribuye
 JOIN Comercio
 ON (Distribuye.cif=Comercio.cif)
