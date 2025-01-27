@@ -52,7 +52,7 @@ LEFT JOIN producto
 ON (fabricante.codigo=producto.codigo_fabricante);
 
 /* Apartado B */
-SELECT DISTINCT fabricante.*
+SELECT DISTINCT fabricante.codigo, fabricante.nombre
 FROM fabricante
 JOIN producto
 ON (fabricante.codigo=producto.codigo_fabricante);
@@ -65,6 +65,4 @@ ON (fabricante.codigo=producto.codigo_fabricante)
 WHERE producto.codigo_fabricante IS NULL;
 
 /* Apartado D */
--- No, si se tiene en cuenta que la tabla 'fabricantes' refleja a todos los posibles fabricantes, no tiene sentido que exista un producto que no esté relacionado con un fabricante. Esto es debido a la relación 1:N entre fabricante y producto.
-
--- Sin embargo, si la tabla 'producto' reflejase otros fabricantes no recogidos en 'fabricante' sí podríamos encontrar productos que al cruzar las tablas (LEFT/RIGHT JOIN) tuvieran 'fabricante.codigo' y 'fabricante.nombre' como NULL.
+-- No, si se tiene en cuenta que la tabla 'fabricantes' refleja a todos los posibles fabricantes, no tiene sentido que exista un producto que no esté relacionado con un fabricante. Esto es debido a la relación 1:N entre fabricante y producto y a la integridad relacional de las tablas.
