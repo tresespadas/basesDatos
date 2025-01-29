@@ -1,0 +1,42 @@
+/* Resumen comandos - Tema 4 */
+
++ Consultas simples (una sola tabla):
+SELECT [ALL/DISTINCT] <nombre_campo> [AS alias_campo], ..., <nombre_campoN>
+FROM <nombre_tabla>
+[WHERE <condicion_selecion>]
+[ORDER BY <nombre_campo> [ASC/DESC]];
+
++ Criterios de selección:
+= <> <= >= < >
+<expresión> [NOT] BETWEEN <valor1> AND <valor2>
+<expresión> [NOT] IN ('valor1','valor2','valor3')
+<nombre_campo> IS [NOT] NULL
+<nombre_campo> [NOT] LIKE <patrón (%, _)>
+
++ Funciones de SQL: ## Sólo pueden aparecer en el SELECT, en el ORDER BY y en el HAVING. NO en el WHERE
+SUM(nombre_campo)
+AVG(nombre_campo)
+MIN(nombre_campo)
+MAX(nombre_campo)
+COUNT(nombre_campo)
+COUNT(*) ## Cuenta los nulos también
+
++ Consultas de grupo (una sola tabla)
+SELECT [ALL/DISTINCT] <nombre_campo> [AS alias_campo], ..., <nombre_campoN>
+FROM <nombre_tabla>
+WHERE <condicion_fila>
+GROUP BY <nombre_campo_grupo>
+[HAVING <condicion_grupo>]
+[ORDER BY <nombre_campo> [ASC/DESC]];
+
++ Consulta multitabla (interna):
+SELECT tabla1.campo1, tabla2.campo1, ...
+FROM tabla1
+JOIN tabla2
+ON (tabla1.campo=tabla2.campo);
+
++ Consulta multitabla (externa):
+SELECT tabla1.campo1, tabla2.campo1, ...
+FROM tabla1
+LEFT JOIN tabla2
+ON (tabla1.campo=tabla2.campo);
