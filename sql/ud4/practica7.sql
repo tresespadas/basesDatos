@@ -64,5 +64,15 @@ LEFT JOIN producto
 ON (fabricante.codigo=producto.codigo_fabricante)
 WHERE producto.codigo_fabricante IS NULL;
 
+/* Consulta de prueba */
+SELECT fabricante.nombre
+FROM fabricante
+JOIN producto
+ON (fabricante.codigo=producto.codigo_fabricante)
+WHERE fabricante.nombre LIKE 'S%'
+GROUP BY producto.codigo_fabricante
+HAVING AVG(producto.precio)>20;
+
+
 /* Apartado D */
 -- No, si se tiene en cuenta que la tabla 'fabricantes' refleja a todos los posibles fabricantes, no tiene sentido que exista un producto que no esté relacionado con un fabricante. Esto es debido a la relación 1:N entre fabricante y producto y a la integridad relacional de las tablas.
