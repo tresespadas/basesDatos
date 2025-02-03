@@ -255,3 +255,40 @@ GROUP BY cifc;
 SELECT cifc, SUM(cantidad) AS total_stock
 FROM Distribucion
 GROUP BY cifc;
+
+-- Apartado 25
+SELECT Nombre, Apellido
+FROM Clientes
+WHERE dni < (
+  SELECT dni
+  FROM Clientes
+  WHERE Nombre='Juan' AND Apellido='Martin'
+);
+
+-- Apartado 26
+SELECT Nombre, Apellido
+FROM Clientes
+WHERE dni <ALL (
+  SELECT dni
+  FROM Clientes
+  WHERE Ciudad='Barcelona'
+);
+
+-- Apartado 27 -- Se puede hacer con >ALL
+SELECT Nombre, Apellido
+FROM Clientes
+WHERE Nombre LIKE 'A%' AND dni > (
+  SELECT MAX(dni) 
+  FROM Clientes
+  WHERE Ciudad='Madrid'
+);
+
+-- Apartado 28
+SELECT Nombre, Apellido
+FROM Clientes
+WHERE Nombre LIKE 'A%' AND dni >ANY (
+  SELECT dni
+  FROM Clientes
+  WHERE Ciudad='Madrid'
+);
+
