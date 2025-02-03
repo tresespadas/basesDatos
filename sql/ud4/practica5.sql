@@ -15,17 +15,22 @@ CREATE TABLE TAutocares (
   Plazas CHAR(2),
   Modelo VARCHAR(10),
   PRIMARY KEY(Matricula)
-)
+)ENGINE=InnoDB;
 
+-- Falta por rellenar
 CREATE TABLE TDesplazamientos (
-  FechaDesplazamien
-)
+  FechaDesplazamien DATE,
+  Autocar VARCHAR(50),
+  Conductor CHAR(4),
+  Destino VARCHAR(20),
+  TotalViajeros INT
+)ENGINE=InnoDB;
 
 /* Apartado A */
 SELECT Matricula
 FROM TAutocares
 WHERE Plazas <= 50 AND Modelo = 'Plane'
-ORDER BY Matrícula DESC;
+ORDER BY Matricula DESC;
 
 /* Apartado B */
 SELECT NombreEm, ApellidosEm, Autocar
@@ -50,7 +55,7 @@ FROM TDesplazamientos
 GROUP BY Destino;
 
 /* Apartado E */
-SELECT COUNT(Matrícula) as autobus_50_plazas
+SELECT COUNT(Matricula) as autobus_50_plazas
 FROM TAutocares
 WHERE Plazas >= 50;
 
@@ -58,3 +63,31 @@ WHERE Plazas >= 50;
 SELECT Conductor, AVG(TotalViajeros) AS media_viajeros_conductor
 FROM TDesplazamientos
 GROUP BY Conductor;
+
+/* Apartado H */
+SELECT Modelo
+FROM TAutocares
+WHERE Plazas = (
+  SELECT MIN(Plazas)
+  FROM TAutocares
+); 
+
+/* Apartado I */
+SELECT Matricula
+FROM TAutocares
+WHERE Plazas >ALL(
+  SELECT TotalViajeros
+  FROM TDesplazamientos
+  WHERE Destino='Cordoba'
+);
+
+/* Apartado J */
+SELECT NombreEm, ApellidosEm
+FROM TEmpleados
+WHERE IdEmpleado IN (
+  SELECT Conductor
+  FROM TDesplazamientos
+  GROUP BY Conductor
+  HAVING COUNT(FechaDesplazamien)>=2
+);
+
