@@ -29,6 +29,6 @@ JOIN Almacenes
 ON (Almacenes.codigo=Cajas.almacen)
 
 /* Apartado 7 */
-SELECT COUNT(Cajas.NumReferencia)
+SELECT COUNT(Cajas.NumReferencia), Cajas.Almacen
 FROM Cajas
 GROUP BY Cajas.Almacen
