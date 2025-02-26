@@ -26,9 +26,16 @@ HAVING AVG(Cajas.valor)>150;
 SELECT Cajas.NumReferencia, Almacenes.lugar
 FROM Cajas
 JOIN Almacenes
-ON (Almacenes.codigo=Cajas.almacen)
+ON (Almacenes.codigo=Cajas.almacen);
 
 /* Apartado 7 */
 SELECT COUNT(Cajas.NumReferencia), Cajas.Almacen
 FROM Cajas
-GROUP BY Cajas.Almacen
+GROUP BY Cajas.Almacen;
+
+/* Apartado 7 mejorado */
+SELECT COUNT(Cajas.NumReferencia), Almacen.Codigo
+FROM Almacen
+LEFT JOIN Cajas
+ON (Almacenes.codigo=Cajas.almacen);
+GROUP BY Almacen.Codigo;
