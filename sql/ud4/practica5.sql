@@ -59,6 +59,15 @@ SELECT COUNT(Matricula) as autobus_50_plazas
 FROM TAutocares
 WHERE Plazas >= 50;
 
+/* Apartado F */
+SELECT NombreEm,
+FROM TEmpleados
+WHERE FechaAntig<(
+  SELECT FechaAntig
+  FROM TEmpleados
+  WHERE NombreEm='Dolores'
+);
+
 /* Apartado G */
 SELECT Conductor, AVG(TotalViajeros) AS media_viajeros_conductor
 FROM TDesplazamientos
