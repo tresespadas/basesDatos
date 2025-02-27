@@ -286,7 +286,7 @@ WHERE Nombre LIKE 'A%' AND dni > (
 -- Apartado 27 con ALL
 SELECT Nombre, Apellido
 FROM Clientes
-WHERE Nombre like 'A%' AND dni >ALL(
+WHERE Nombre LIKE 'A%' AND dni >ALL(
   SELECT dni
   FROM Clientes
   WHERE Ciudad='Madrid'
