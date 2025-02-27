@@ -26,6 +26,29 @@ CREATE TABLE TDesplazamientos (
   TotalViajeros INT
 )ENGINE=InnoDB;
 
+INSERT INTO TEmpleados (NombreEm, ApellidosEm, IdEmpleado, FechaAntigüedadEm) VALUES
+('Juan', 'Gómez de Lidño', 1111, '1970-02-20'),
+('Luis', 'del Olmo Olinillo', 2222, '1982-12-15'),
+('Juana', 'Reina de España', 3333, '1997-10-10'),
+('Dolores', 'Fuerte de Barriga', 4444, '1970-12-12'),
+('José', 'Ortega Cano', 5555, '1988-04-15');
+
+INSERT INTO TAutocares (Matricula, Plazas, Modelo) VALUES
+('AA-1111-AA', 50, 'Travel'),
+('BB-2222-BB', 52, 'Travel'),
+('CC-3333-CC', 50, 'Travel'),
+('DD-4444-DD', 48, 'Plane'),
+('EE-5555-EE', 48, 'Confort'),
+('FF-6666-FF', 45, 'Plane');
+
+INSERT INTO TDesplazamientos (FechaDesplazamien, Autocar, Conductor, Destino, TotalViajeros) VALUES
+('1998-01-01', 'BB-2222-BB', 3333, 'Granada', 45),
+('1998-02-02', 'CC-3333-CC', 1111, 'Cordoba', 44),
+('1998-03-03', 'AA-1111-AA', 4444, 'Jaen', 47),
+('1998-04-04', 'CC-3333-CC', 2222, 'Huelva', 47),
+('1998-04-20', 'DD-4444-DD', 1111, 'Cordoba', 46),
+('1998-01-01', 'EE-5555-EE', 5555, 'Almería', 45);
+
 /* Apartado A */
 SELECT Matricula
 FROM TAutocares
@@ -60,10 +83,10 @@ FROM TAutocares
 WHERE Plazas >= 50;
 
 /* Apartado F */
-SELECT NombreEm,
+SELECT NombreEm
 FROM TEmpleados
-WHERE FechaAntig>(
-  SELECT FechaAntig
+WHERE FechaAntigüedadEm>(
+  SELECT FechaAntigüedadEm
   FROM TEmpleados
   WHERE NombreEm='Dolores'
 );
@@ -74,17 +97,17 @@ FROM TDesplazamientos
 GROUP BY Conductor;
 
 /* Apartado H */
-SELECT Modelo
+SELECT TAutocares.Modelo
 FROM TAutocares
-WHERE Plazas = (
-  SELECT MIN(Plazas)
+WHERE TAutocares.Plazas=(
+  SELECT MIN(TAutocares.Plazas)
   FROM TAutocares
 ); 
 
 /* Apartado I */
-SELECT Matricula
+SELECT TAutocares.Matricula
 FROM TAutocares
-WHERE Plazas >ALL(
+WHERE TAutocares.Plazas >ALL(
   SELECT Plazas
   FROM TAutocares
   WHERE Matricula IN (
@@ -102,7 +125,7 @@ WHERE Plazas >ALL(
   FROM TAutocares
   JOIN TDesplazamientos
   ON (TDesplazamientos.Autocar=TAutocares.Matricula)
-  WHERE TDesplazamiento.Destino='Cordoba'
+  WHERE TDesplazamientos.Destino='Cordoba'
 );
 
 /* Apartado J */
@@ -114,4 +137,3 @@ WHERE IdEmpleado IN (
   GROUP BY Conductor
   HAVING COUNT(FechaDesplazamien)>=2
 );
-
