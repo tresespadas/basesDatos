@@ -62,7 +62,7 @@ WHERE Plazas >= 50;
 /* Apartado F */
 SELECT NombreEm,
 FROM TEmpleados
-WHERE FechaAntig<(
+WHERE FechaAntig>(
   SELECT FechaAntig
   FROM TEmpleados
   WHERE NombreEm='Dolores'
@@ -85,9 +85,24 @@ WHERE Plazas = (
 SELECT Matricula
 FROM TAutocares
 WHERE Plazas >ALL(
-  SELECT TotalViajeros
-  FROM TDesplazamientos
-  WHERE Destino='Cordoba'
+  SELECT Plazas
+  FROM TAutocares
+  WHERE Matricula IN (
+    SELECT Matricula
+    FROM TDesplazamientos
+    WHERE Destino='Cordoba'
+  )
+);
+
+/* Apartado I */ -- Otra forma?
+SELECT Matricula
+FROM TAutocares
+WHERE Plazas >ALL(
+  SELECT Plazas
+  FROM TAutocares
+  JOIN TDesplazamientos
+  ON (TDesplazamientos.Autocar=TAutocares.Matricula)
+  WHERE TDesplazamiento.Destino='Cordoba'
 );
 
 /* Apartado J */
