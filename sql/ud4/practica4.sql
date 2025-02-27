@@ -283,6 +283,15 @@ WHERE Nombre LIKE 'A%' AND dni > (
   WHERE Ciudad='Madrid'
 );
 
+-- Apartado 27 con ALL
+SELECT Nombre, Apellido
+FROM Clientes
+WHERE Nombre like 'A%' AND dni >ALL(
+  SELECT dni
+  FROM Clientes
+  WHERE Ciudad='Madrid'
+);
+
 -- Apartado 28
 SELECT Nombre, Apellido
 FROM Clientes
