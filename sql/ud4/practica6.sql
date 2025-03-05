@@ -416,11 +416,11 @@ WHERE Comercio.Ciudad = (
 );
 
 /* Apartado 44 */
-SELECT Cliente.nombre
+SELECT DISTINCT Cliente.nombre
 FROM Cliente
 JOIN Registra
 ON (Cliente.dni=Registra.dni)
-WHERE Registra.medio =ANY (
+WHERE Registra.medio IN (
   SELECT Registra.medio
   FROM Registra
   WHERE Registra.dni = (
