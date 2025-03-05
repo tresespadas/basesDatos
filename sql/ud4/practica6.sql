@@ -391,7 +391,7 @@ WHERE Programa.nombre='Access' AND Programa.version='XP';
 /* Apartado 41 */
 SELECT Fabricante.nombre
 FROM Fabricante
-WHERE Fabricante.pais = (
+WHERE Fabricante.nombre <> 'Oracle' AND Fabricante.pais = (
   SELECT Fabricante.pais
   FROM Fabricante
   WHERE Fabricante.nombre='Oracle'
@@ -400,7 +400,7 @@ WHERE Fabricante.pais = (
 /* Apartado 42 */
 SELECT Cliente.nombre
 FROM Cliente
-WHERE Cliente.edad = (
+WHERE Cliente.nombre <> 'Pepe Pérez' AND Cliente.edad = (
   SELECT Cliente.edad
   FROM Cliente
   WHERE Cliente.nombre='Pepe Pérez'
@@ -409,23 +409,39 @@ WHERE Cliente.edad = (
 /* Apartado 43 */
 SELECT Comercio.*
 FROM Comercio
-WHERE Comercio.Ciudad = (
+WHERE Comercio.nombre <> 'FNAC' AND Comercio.Ciudad IN (
   SELECT Comercio.Ciudad
   FROM Comercio
   WHERE Comercio.nombre='FNAC'
 );
 
 /* Apartado 44 */
-SELECT DISTINCT Cliente.nombre
+SELECT Cliente.nombre
 FROM Cliente
 JOIN Registra
 ON (Cliente.dni=Registra.dni)
-WHERE Registra.medio IN (
+WHERE Cliente.nombre <> 'Pepe Pérez' AND Registra.medio IN (
   SELECT Registra.medio
   FROM Registra
-  WHERE Registra.dni = (
-    SELECT Cliente.dni
-    FROM Cliente
-    WHERE Cliente.nombre='Pepe Pérez'
+  JOIN Cliente
+  ON (Registra.dni=Cliente.dni)
+  WHERE Cliente.nombre='Pepe Pérez'
+);
+
+/* Apartado 44 */ -- SIN JOINs
+SELECT Cliente.nombre
+FROM Cliente
+WHERE Cliente.nombre <> 'Pepe Pérez' AND Cliente.dni IN (
+  SELECT Registra.dni
+  FROM Registra
+  WHERE Registra.medio IN (
+    SELECT Registra.medio
+    FROM Registra
+    WHERE Registra.dni = (
+      SELECT Cliente.dni
+      FROM Cliente
+      WHERE Cliente.nombre='Pepe Pérez'
+    )
   )
 );
+
