@@ -39,3 +39,12 @@ FROM Almacen
 LEFT JOIN Cajas
 ON (Almacenes.codigo=Cajas.almacen);
 GROUP BY Almacen.Codigo;
+
+/* Apartado 9 */
+SELECT Cajas.NumReferencia
+FROM Cajas
+WHERE Cajas.Almacen IN (
+  SELECT Almacen.codigo
+  FROM Almacen
+  WHERE Almacen.Lugar='Bilbao'
+);
