@@ -46,7 +46,7 @@ FROM Almacenes
 WHERE Almancenes.capacidad < (
   SELECT COUNT(Cajas.NumReferencia)
   FROM Cajas
-  GROUP BY Cajas.Almacen
+  WHERE Almacenes.codigo = Cajas.Almacen
 );
 
 /* Apartado 9 */
