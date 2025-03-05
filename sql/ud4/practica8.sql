@@ -40,6 +40,13 @@ LEFT JOIN Cajas
 ON (Almacenes.codigo=Cajas.almacen);
 GROUP BY Almacen.Codigo;
 
+/* Apartado 8 */
+SELECT Almacenes.codigo
+FROM Almacenes
+WHERE Almacenes.Codigo = ( -- Posible IN?
+  SELECT 
+)
+
 /* Apartado 9 */
 SELECT Cajas.NumReferencia
 FROM Cajas
