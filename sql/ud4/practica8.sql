@@ -37,15 +37,17 @@ GROUP BY Cajas.Almacen;
 SELECT COUNT(Cajas.NumReferencia), Almacen.Codigo
 FROM Almacen
 LEFT JOIN Cajas
-ON (Almacenes.codigo=Cajas.almacen);
+ON (Almacenes.codigo=Cajas.almacen)
 GROUP BY Almacen.Codigo;
 
 /* Apartado 8 */
 SELECT Almacenes.codigo
 FROM Almacenes
-WHERE Almacenes.Codigo = ( -- Posible IN?
-  SELECT 
-)
+WHERE Almancenes.capacidad < (
+  SELECT COUNT(Cajas.NumReferencia)
+  FROM Cajas
+  GROUP BY Cajas.Almacen
+);
 
 /* Apartado 9 */
 SELECT Cajas.NumReferencia
