@@ -387,3 +387,45 @@ ON (Registra.codigo=Programa.codigo)
 JOIN Cliente
 ON (Registra.dni=Cliente.dni)
 WHERE Programa.nombre='Access' AND Programa.version='XP';
+
+/* Apartado 41 */
+SELECT Fabricante.nombre
+FROM Fabricante
+WHERE Fabricante.pais = (
+  SELECT Fabricante.pais
+  FROM Fabricante
+  WHERE Fabricante.nombre='Oracle'
+);
+
+/* Apartado 42 */
+SELECT Cliente.nombre
+FROM Cliente
+WHERE Cliente.edad = (
+  SELECT Cliente.edad
+  FROM Cliente
+  WHERE Cliente.nombre='Pepe Pérez'
+);
+
+/* Apartado 43 */
+SELECT Comercio.*
+FROM Comercio
+WHERE Comercio.Ciudad = (
+  SELECT Comercio.Ciudad
+  FROM Comercio
+  WHERE Comercio.nombre='FNAC'
+);
+
+/* Apartado 44 */
+SELECT Cliente.nombre
+FROM Cliente
+JOIN Registra
+ON (Cliente.dni=Registra.dni)
+WHERE Registra.medio =ANY (
+  SELECT Registra.medio
+  FROM Registra
+  WHERE Registra.dni = (
+    SELECT Cliente.dni
+    FROM Cliente
+    WHERE Cliente.nombre='Pepe Pérez'
+  )
+);
