@@ -59,6 +59,14 @@ LEFT JOIN emple
 ON (depart.dept_no=emple.dept_no)
 WHERE emple.emp_no IS NULL
 
+/* Apartado 2 */ -- Con subconsultas
+DELETE
+FROM depart
+WHERE dept NOT IN (
+  SELECT dept_no
+  FROM emple
+);
+
 /* Apartado 3 */ -- DUDA: Empleados en general u oficio='EMPLEADO'
 DELETE
 FROM emple
