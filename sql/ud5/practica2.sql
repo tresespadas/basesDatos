@@ -13,5 +13,5 @@ CREATE TABLE cajas (
     contenido VARCHAR(100),
     valor INT UNSIGNED,
     almacen INT,
-    FOREIGN KEY (dept_no) REFERENCES depart(dept_no)
+    FOREIGN KEY (almacen) REFERENCES almacenes(codigo)
 );
