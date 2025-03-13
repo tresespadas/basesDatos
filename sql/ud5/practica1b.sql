@@ -71,7 +71,7 @@ WHERE dept NOT IN (
 DELETE
 FROM emple
 WHERE salario > (
-  SELECT SUM(salario)
+  SELECT MAX(salario)
   FROM emple
   WHERE dept_no=20
 );
@@ -105,7 +105,8 @@ WHERE dnombre=(
   SELECT dnombre
   FROM depart
   WHERE dept_no=10
-);
+)
+AND dept_no <> 10;
 
 /* Apartado 8 */
 INSERT INTO emple (emp_no, apellido, oficio, dir, fecha_alt, salario, comision, dept_no) 
