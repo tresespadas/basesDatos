@@ -32,7 +32,8 @@ SET valor=valor*0.85;
 
 /* Apartado 4 */
 UPDATE cajas
-SET valor=0.80*(
+SET valor=0.80*valor
+WHERE valor > (
   SELECT AVG(valor)
   FROM cajas
 );
@@ -43,10 +44,14 @@ FROM cajas
 WHERE valor < 100;
 
 /* Apartado 6 */
-UPDATE almacenes
-SET capacidad=0
-WHERE capacidad<(
-  SELECT COUNT(*)
+DELETE
+FROM cajas
+WHERE almacen IN (
+  SELECT codigo
   FROM cajas
-  WHERE cajas.almacen = almacenes.codigo
+  WHERE capacidad < (
+    SELECT COUNT(*)
+    FROM cajas
+    WHERE cajas.almacen = almacenes.codigo
+  )
 );
