@@ -122,11 +122,11 @@ WHERE cancion_id IN (
   WHERE fecha_reproducción NOT LIKE '2024%'
 );
 
-/* Consulta 5: Muestra los artistas que tienen canciones con una duración mayor que todas las canciones de artias de España */
+/* Consulta 5: Muestra los artistas que tienen canciones con una duración mayor que todas las canciones de artistas de España */
 
 SELECT Artistas.*
 FROM Artistas
-WHERE artista_id = (
+WHERE artista_id IN (
   SELECT artista_id
   FROM Canciones
   WHERE duración > ALL (
