@@ -40,3 +40,12 @@ SELECT tabla1.campo1, tabla2.campo1, ...
 FROM tabla1
 LEFT JOIN tabla2
 ON (tabla1.campo=tabla2.campo);
+
++ Consulta con subconsulta
+SELECT campo1
+FROM tabla2
+WHERE campo2 = (
+  SELECT campo2
+  FROM tabla2
+  WHERE <condición>
+)
