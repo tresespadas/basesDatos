@@ -28,7 +28,7 @@ WHERE id_habitacion IN (
 ) AND fecha_entrada = '2024-03-01' AND fecha_salida = '2024-03-05'
 LIMIT 1
 FOR UPDATE;
-UPDATE reservas SET disponible = CASE
+UPDATE reservas SET disponible = CASE -- Esto es con un INSERT INTO en verdad
   WHEN disponible = true THEN false
   ELSE disponible
 END
