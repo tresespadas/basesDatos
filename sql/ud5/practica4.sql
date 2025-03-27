@@ -26,7 +26,7 @@ WHERE id_habitacion IN (
   WHERE tipo = 'Doble'
   AND disponible = true
 ) AND fecha_entrada = '2024-03-01' AND fecha_salida = '2024-03-05'
-LIMIT 1;
+LIMIT 1
 FOR UPDATE;
 UPDATE reservas SET disponible = CASE
   WHEN disponible = true THEN false
@@ -43,4 +43,3 @@ AND SET fecha_entrada = '2024-03-01'
 AND SET fecha_salida = '2024-03-05'
 SET email = 'email_juan@email.com'
 COMMIT;
-
