@@ -23,3 +23,14 @@ FOR UPDATE;
 UPDATE productos SET stock = stock - 5
 WHERE id = 1;
 COMMIT;
+
+
+/* Con CASE */
+START TRANSACTION;
+SELECT stock FROM productos WHERE id=1 FOR UPDATE;
+UPDATE productos SET stock = CASE
+  WHEN stock >= 5 THEN stock - 5
+  ELSE stock
+END
+WHERE id=1;
+COMMIT;
