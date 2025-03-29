@@ -43,3 +43,10 @@ AND SET fecha_entrada = '2024-03-01'
 AND SET fecha_salida = '2024-03-05'
 SET email = 'email_juan@email.com'
 COMMIT;
+
+START TRANSACTION;
+SELECT fecha_entrada, fecha_salida, tipo, disponible
+FROM reservas
+JOIN habitaciones
+ON ( reservas.id_habitacion = habitaciones.id )
+WHERE 
