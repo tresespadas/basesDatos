@@ -18,35 +18,20 @@ CREATE TABLE reservas (
 
 /* Con CASE */
 START TRANSACTION;
-SELECT tipo, fecha_entrada, fecha_salida, disponible
-FROM reservas
-WHERE id_habitacion IN (
-  SELECT id_habitacion
-  FROM habitaciones
-  WHERE tipo = 'Doble'
-  AND disponible = true
-) AND fecha_entrada = '2024-03-01' AND fecha_salida = '2024-03-05'
+SELECT id_habitacion into @id_habitacion
+FROM habitaciones, reservas
+WHERE tipo = 'Doble'
+AND habitaciones.id = reservas.id_habitacion
+AND disponible = true
+AND (fecha_entrada NOT BETWEEN '2024-03-1' AND '2024-03-05')
+AND (fecha_salida NOT BETWEEN '2024-03-1' AND '2024-03-05')
 LIMIT 1
 FOR UPDATE;
-UPDATE reservas SET disponible = CASE -- Esto es con un INSERT INTO en verdad
-  WHEN disponible = true THEN false
-  ELSE disponible
-END
-WHERE id_habitacion IN (
-  SELECT id_habitacion
-  FROM habitaciones
-  WHERE tipo = 'Doble'
-) AND fecha_entrada = '2024-03-01' AND fecha_salida = '2024-03-05'
-LIMIT 1
-AND SET nombre = 'Juan'
-AND SET fecha_entrada = '2024-03-01' 
-AND SET fecha_salida = '2024-03-05'
-SET email = 'email_juan@email.com'
-COMMIT;
 
-START TRANSACTION;
-SELECT fecha_entrada, fecha_salida, tipo, disponible
-FROM reservas
-JOIN habitaciones
-ON ( reservas.id_habitacion = habitaciones.id )
-WHERE 
+UPDATE habitaciones 
+SET disponible = FALSE 
+WHERE id = @id_habitacion
+
+INSER INTO reservas(id_habitacion, fecha_entrada, fecha_salida, nombre, email)
+VALUES (@id_habitacion, '2024-03-01', '2024-03-05', 'Juan', 'email_juan@gmail.com')
+COMMIT;
