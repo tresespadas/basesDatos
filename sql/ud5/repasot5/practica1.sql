@@ -1,7 +1,7 @@
 
-DROP DATABASE IF EXISTS practica1_ud5;
-CREATE DATABASE practica1_ud5 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE practica1_ud5;
+DROP DATABASE IF EXISTS repaso_t5_p1;
+CREATE DATABASE repaso_t5_p1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE repaso_t5_p1;
 
 CREATE TABLE depart (
   dept_no INT PRIMARY KEY,
@@ -45,18 +45,102 @@ VALUES
 (7934, 'MUÑOZ', 'EMPLEADO', 7782, '1982/01/23', 169000, NULL, 10);
 
 /* Ejercicio 1 */
-INSERT INTO emple
-VALUES (9999, 'GONZALEZ', 'EMPLEADO', NULL, '2025/04/01', NULL, NULL, 10);
--- Probar si se puede hacer INSERT INTO emple (emp_no, apellido, dept_no) VALUES (9999, 'GONZALEZ', 10);
+INSERT INTO emple (emp_no, apellido, dept_no) 
+VALUES (9999, 'GONZALEZ', 10);
 
 /* Ejercicio 2 */
-INSERT INTO emple
-VALUES (5000, 'MORAGA', 'EMPLEADO', 7902, '199/10/17', 100000, NULL, 20);
+INSERT INTO emple (emp_no, apellido, oficio, dir, fecha_alt, salario, comision, dept_no)
+VALUES
+(5000, 'MORAGA', 'EMPLEADO', 7902, '1999/10/17', 100000, NULL, 20);
 
 /* Ejercicio 3 */
 INSERT INTO depart
 VALUES (50, 'GENERAL', 'SEVILLA');
 
 /* Ejercicio 4 */
-INSERT INTO depart (dept_no, dnombre) -- Probar si se puede hacer así
+INSERT INTO depart (dept_no, dnombre)
 VALUES (60, 'PRUEBAS');
+
+/* Ejercicio 5 */
+CREATE TABLE emple30 (
+    emp_no INT PRIMARY KEY,
+    apellido VARCHAR(100) NOT NULL,
+    oficio VARCHAR(100),
+    dir INT UNSIGNED,
+    fecha_alt DATE,
+    salario INT,
+    comision INT,
+    dept_no INT NOT NULL,
+    FOREIGN KEY (dept_no) REFERENCES depart(dept_no)
+);
+
+INSERT INTO emple30
+SELECT *
+FROM emple
+WHERE dept_no=30;
+
+/* Ejercicio 6 */
+CREATE TABLE emple20 (
+    emp_no INT PRIMARY KEY,
+    apellido VARCHAR(100) NOT NULL,
+    oficio VARCHAR(100),
+    dir INT UNSIGNED,
+    fecha_alt DATE,
+    salario INT,
+    comision INT,
+    dept_no INT NOT NULL,
+    FOREIGN KEY (dept_no) REFERENCES depart(dept_no)
+);
+
+INSERT INTO emple20
+SELECT *
+FROM emple
+WHERE dept_no=20;
+
+/* Ejercicio 7 */
+UPDATE emple
+SET salario=salario*2
+WHERE dept_no=20;
+
+/* Ejercicio 8 */
+UPDATE emple
+SET dept_no=20
+WHERE dept_no=30;
+
+/* Ejercicio 9 */
+UPDATE emple
+SET salario=salario*1.1
+WHERE dept_no=10;
+
+/* Ejercicio 10 */
+UPDATE depart
+SET loc='BILBAO'
+WHERE dept_no=10;
+
+/* Ejercicio 11 */
+UPDATE emple
+SET salario = (
+  SELECT salario
+  FROM emple30
+  WHERE apellido='NEGRO'
+)
+WHERE apellido='ARROYO';
+
+/* Ejercicio 12 */
+UPDATE emple
+SET salario = (
+  SELECT salario
+  FROM emple30
+  WHERE apellido='MUÑOZ'
+)
+AND oficio = (
+  SELECT oficio
+  FROM emple30
+  WHERE apellido='MUÑOZ'
+)
+WHERE apellido='JIMENO';
+
+/* Ejercicio 13 */
+DELETE
+FROM depart
+WHERE dept_no=50;

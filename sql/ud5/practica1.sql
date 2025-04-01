@@ -134,7 +134,7 @@ SET salario=(
   SELECT salario
   FROM emple30
   WHERE apellido='MUÑOZ'
-),
+) AND
 oficio=(
   SELECT oficio
   FROM emple30
