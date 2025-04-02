@@ -1,4 +1,3 @@
-
 DROP DATABASE IF EXISTS repaso_t5_p1;
 CREATE DATABASE repaso_t5_p1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE repaso_t5_p1;
