@@ -16,7 +16,6 @@ CREATE TABLE reservas (
 );
 
 
-/* Con CASE */
 START TRANSACTION;
 SELECT id_habitacion into @id_habitacion
 FROM habitaciones, reservas
@@ -33,5 +32,5 @@ SET disponible = FALSE
 WHERE id = @id_habitacion
 
 INSER INTO reservas(id_habitacion, fecha_entrada, fecha_salida, nombre, email)
-VALUES (@id_habitacion, '2024-03-01', '2024-03-05', 'Juan', 'email_juan@gmail.com')
+VALUES (@id_habitacion, '2024-03-01', '2024-03-05', 'Juan', 'email_juan@gmail.com');
 COMMIT;
