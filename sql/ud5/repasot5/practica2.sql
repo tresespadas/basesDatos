@@ -16,3 +16,40 @@ CREATE TABLE cajas (
     FOREIGN KEY (almacen) REFERENCES almacenes(codigo)
 );
 
+/* Ejercicio 1 */
+INSERT INTO almacenes
+VALUES (1, 'BARCELONA', 3);
+
+/* Ejercicio 2 */
+INSERT INTO cajas
+VALUES ('H5RT', 'Papel', 200, 2);
+
+/* Ejercicio 3 */
+UPDATE cajas
+SET valor = valor*0.85;
+
+/* Ejercicio 4 */
+UPDATE cajas
+SET valor = valor*0.80
+WHERE valor > (
+  SELECT AVG(valor)
+  FROM cajas
+);
+
+/* Ejercicio 5 */
+DELETE
+FROM cajas
+WHERE valor < 100;
+
+/* Ejercicio 6 */
+DELETE 
+FROM cajas
+WHERE almacen IN (
+  SELECT codigo
+  FROM almacenes
+  WHERE capacidad < (
+    SELECT COUNT(*)
+    FROM cajas
+    WHERE almacenes.codigo = cajas.almacen
+  )
+);
