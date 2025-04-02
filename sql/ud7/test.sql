@@ -8,3 +8,6 @@ CREATE PROCEDURE prueba.saludo(IN letra char)
   END; $$
 
 DELIMITER ;
+
+
+-- call prueba.saludo("a");
