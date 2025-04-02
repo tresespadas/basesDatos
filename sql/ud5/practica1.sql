@@ -124,9 +124,9 @@ UPDATE emple
 SET salario=(
   SELECT salario
   FROM emple30
-  WHERE apellido='ARROYO'
+  WHERE apellido='NEGRO'
 )
-WHERE apellido='NEGRO';
+WHERE apellido='ARROYO';
 
 /* Apartado 12 */
 UPDATE emple 

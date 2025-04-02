@@ -144,3 +144,13 @@ WHERE apellido='JIMENO';
 DELETE
 FROM depart
 WHERE dept_no=50;
+
+/* Ejercicio 14 */
+DELETE
+FROM emple
+WHERE dept_no=20 AND oficio='ANALISTA';
+
+/* Ejercicio 15 */
+DELETE
+FROM emple
+WHERE comision IS NULL;
