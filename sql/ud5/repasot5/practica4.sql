@@ -1,13 +1,12 @@
 START TRANSACTION;
 
 SELECT id INTO @id_habitacion
-FROM habitaciones
-WHERE id IN (
-  SELECT id_habitacion
-  FROM reservas
-  WHERE fecha_entrada NOT BETWEEN '2024/03/01' AND '2024/03/05'
-  AND fecha_salida NOT BETWEEN '2024/03/01' AND '2024/03/05'
-) AND tipo='DOBLE' AND disponible=true
+FROM habitaciones, reservas
+WHERE habitaciones.id = reservas.id_habitacion
+AND fecha_entrada NOT BETWEEN '2024/03/01' AND '2024/03/05'
+AND fecha_salida NOT BETWEEN '2024/03/01' AND '2024/03/05'
+AND tipo='DOBLE' 
+AND disponible=true
 LIMIT 1
 FOR UPDATE;
 
