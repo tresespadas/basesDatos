@@ -22,6 +22,68 @@ END; $$
 
 DELIMITER ;
 
+/* Ejercicio 2 */
+DELIMITER $$
+USE prueba $$
+DROP FUNCTION IF EXISTS diaSemana $$
+CREATE FUNCTION diaSemana(num INT)
+RETURNS VARCHAR(255)
+BEGIN
+  DECLARE dia VARCHAR(255);
+  CASE 
+    WHEN num = 1 THEN SET dia = "Lunes";
+    WHEN num = 2 THEN SET dia = "Martes";
+    WHEN num = 3 THEN SET dia = "Miércoles";
+    WHEN num = 4 THEN SET dia = "Jueves";
+    WHEN num = 5 THEN SET dia = "Viernes";
+    WHEN num = 6 THEN SET dia = "Sábado";
+    WHEN num = 7 THEN SET dia = "Domingo";
+  END CASE;
+  RETURN dia;
+END; $$
+
+
+DROP PROCEDURE IF EXISTS calendario $$
+CREATE PROCEDURE calendario(IN num INT)
+BEGIN
+  SELECT diaSemana(num) AS "resultado";
+END; $$
+
+DELIMITER ;
+
+/* Ejercicio 3 */
+DELIMITER $$
+USE prueba $$
+DROP FUNCTION IF EXISTS mayorDeTres $$
+CREATE FUNCTION mayorDeTres(num1 INT, num2 INT, num3 INT)
+RETURNS INT
+BEGIN
+  DECLARE mayorValor INT;
+  IF num1 > num2 THEN
+    IF num1 > num3 THEN SET mayorValor = num1;
+    ELSE SET mayorValor = num3;
+    END IF;
+  ELSEIF num2 > num3 THEN SET mayorValor = num2;
+    ELSE SET mayorValor = num3;
+  END IF;
+  RETURN mayorValor;
+END; $$
+
+DELIMITER ;
+
+/* Ejercicio 4 */
+DELIMITER $$
+USE prueba $$
+DROP FUNCTION IF EXISTS cuadrado $$
+CREATE FUNCTION cuadrado(num1 INT)
+RETURNS INT
+BEGIN
+  DECLARE resultado INT;
+  SET resultado = POWER(num1,2);
+  RETURN resultado;
+END; $$
+
+DELIMITER ;
 /* Ejercicio 5 */
 USE prueba;
 DROP TABLE IF EXISTS peques;
