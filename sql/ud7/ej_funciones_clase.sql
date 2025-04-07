@@ -12,7 +12,13 @@ BEGIN
   RETURN valor;
 END; $$
 
-
+DROP PROCEDURE IF EXISTS prueba.mensaje $$
+CREATE PROCEDURE prueba.mensaje(IN num INT)
+BEGIN
+  IF prueba.espar(num) THEN SELECT CONCAT("El numero ",num," es par") AS "Resultado";
+  ELSE SELECT CONCAT("El número ",num," no es par") AS "Resultado";
+  END IF;
+END; $$
 
 
 DELIMITER ;
