@@ -1,0 +1,14 @@
+DELIMITER $$
+USE prueba $$
+DROP FUNCTION IF EXISTS ejemplo10 $$
+CREATE FUNCTION ejemplo10(IN param1 INT)
+BEGIN
+  CASE
+    WHEN param1 = 1 THEN INSERT INTO t SELECT 'primero';
+    WHEN param1 = 2 THEN INSERT INTO t SELECT 'segundo';
+    WHEN param1 = 3 THEN INSERT INTO t SELECT 'tercero';
+    ELSE INSERT INTO t SELECT 'otro';
+  END CASE;
+END; $$
+
+DELIMITER ;
