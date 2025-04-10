@@ -38,7 +38,6 @@ BEGIN
     WHEN num = 5 THEN SET dia = "Viernes";
     WHEN num = 6 THEN SET dia = "Sábado";
     WHEN num = 7 THEN SET dia = "Domingo";
-    ELSE THEN SELECT 'El valor introducido no es correcto';
   END CASE;
   RETURN dia;
 END; $$
