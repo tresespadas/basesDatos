@@ -77,11 +77,7 @@ USE prueba $$
 DROP FUNCTION IF EXISTS cuadrado $$
 CREATE FUNCTION cuadrado(num1 INT)
 RETURNS INT
-BEGIN
-  DECLARE resultado INT;
-  SET resultado = POWER(num1,2);
-  RETURN resultado;
-END; $$
+  RETURN POWER(num1,2); $$
 
 DELIMITER ;
 /* Ejercicio 5 */
