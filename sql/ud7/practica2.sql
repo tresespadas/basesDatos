@@ -41,10 +41,10 @@ CREATE FUNCTION prueba.bisiesto(num INT)
 RETURNS INT
 BEGIN
   DECLARE resultado BOOLEAN;
-  IF (num % 4 = 0) THEN SET resultado = true;
-  ELSEIF (num % 100 = 0) THEN 
-    IF (num % 400 = 0) THEN SET resultado = true;
+  IF (num % 4 = 0) THEN 
+    IF (num % 100 <> 0) THEN SET resultado = true;
     END IF;
+  ELSEIF (num % 400 = 0) THEN SET resultado = true;
   ELSE SET resultado = false;
   END IF;
   RETURN resultado;
