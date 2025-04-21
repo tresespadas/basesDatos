@@ -40,12 +40,12 @@ DROP FUNCTION IF EXISTS prueba.bisiesto $$
 CREATE FUNCTION prueba.bisiesto(num INT)
 RETURNS INT
 BEGIN
-  DECLARE resultado INT;
-  IF (num % 4 = 0) THEN SET resultado = 1;
+  DECLARE resultado BOOLEAN;
+  IF (num % 4 = 0) THEN SET resultado = true;
   ELSEIF (num % 100 = 0) THEN 
-    IF (num % 400 = 0) THEN SET resultado = 1;
+    IF (num % 400 = 0) THEN SET resultado = true;
     END IF;
-  ELSE SET resultado = 0;
+  ELSE SET resultado = false;
   END IF;
   RETURN resultado;
 END; $$
