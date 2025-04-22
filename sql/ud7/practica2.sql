@@ -61,16 +61,16 @@ RETURNS INT
 
 DELIMITER ;
 
-/* Actividad 2: Ejercicio 5 */ -- CORREGIR
+/* Actividad 2: Ejercicio 5 */ -- DUDA (?)
 DELIMITER $$
 DROP PROCEDURE IF EXISTS prueba.bono_rendimiento $$
-CREATE PROCEDURE prueba.bono_rendimiento(Empleados.id_empleado INT, Empleados.calificacion_rendimiento CHAR(1))
+CREATE PROCEDURE prueba.bono_rendimiento(id_empleado INT, calificacion_rendimiento CHAR(1))
 BEGIN
-  DECLARE bono INT;
-  CASE Empleados.calificacion_rendimiento
-    WHEN 'A' THEN SET bono = 500;
-    WHEN 'B' THEN SET bono = 250;
-    WHEN 'C' THEN SET bono = 0;
+  CASE calificacion_rendimiento
+    WHEN 'A' THEN RETURN 500;
+    WHEN 'B' THEN RETURN 250;
+    WHEN 'C' THEN RETURN 0;
+    ELSE RETURN NULL;
   END CASE;
 END; $$
 
