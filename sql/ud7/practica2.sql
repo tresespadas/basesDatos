@@ -61,7 +61,7 @@ RETURNS INT
 
 DELIMITER ;
 
-/* Actividad 2: Ejercicio 5 */
+/* Actividad 2: Ejercicio 5 */ -- CORREGIR
 DELIMITER $$
 DROP PROCEDURE IF EXISTS prueba.bono_rendimiento $$
 CREATE PROCEDURE prueba.bono_rendimiento(Empleados.id_empleado INT, Empleados.calificacion_rendimiento CHAR(1))
