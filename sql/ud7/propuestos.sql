@@ -23,8 +23,8 @@ BEGIN
   CASE
     WHEN p.valor < 50 THEN INSERT INTO cajas VALUES (p.numreferencia, p.valor, 1);
     WHEN p.valor BETWEEN 50 AND 100 THEN INSERT INTO cajas VALUES (p.numreferencia, p.valor, 2);
-    WHEN p.valor BETWEEN 100 AND 200 THEN INSERT INTO cajas VALUES (p.numreferencia, p.valor, 3);
-    WHEN p.valor BETWEEN 200 AND 500 THEN INSERT INTO cajas VALUES (p.numreferencia, p.valor, 4);
+    WHEN p.valor BETWEEN 101 AND 200 THEN INSERT INTO cajas VALUES (p.numreferencia, p.valor, 3);
+    WHEN p.valor BETWEEN 201 AND 500 THEN INSERT INTO cajas VALUES (p.numreferencia, p.valor, 4);
     WHEN p.valor > 500 THEN SELECT 'No se puede almacenar';
   END CASE;
 END; $$
