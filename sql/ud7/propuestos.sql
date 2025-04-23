@@ -37,7 +37,7 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS bd.precio_iva $$
 CREATE PROCEDURE bd.precio_iva()
 BEGIN
-  ALTER TABLE productos ADD precio_con_iva FLOAT(10,2) AFTER precio;
+  ALTER TABLE productos ADD precio_con_iva FLOAT(10,2);
   UPDATE productos SET precio_con_iva = precio*1.21 WHERE tipo = 'textil';
 END; $$
 
