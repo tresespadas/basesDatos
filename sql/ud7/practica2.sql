@@ -61,7 +61,7 @@ RETURNS INT
 
 DELIMITER ;
 
-/* Actividad 2: Ejercicio 5 */ -- DUDA (?)
+/* Actividad 2: Ejercicio 5 */
 DELIMITER $$
 DROP PROCEDURE IF EXISTS prueba.bono_rendimiento $$
 CREATE PROCEDURE prueba.bono_rendimiento(id_empleado INT, calificacion_rendimiento CHAR(1))
@@ -76,3 +76,15 @@ END; $$
 
 DELIMITER ;
 
+/* Actividad 2: Ejercicio 6 */
+DELIMITER $$
+USE bd $$
+DROP PROCEDURE IF EXISTS ejercicio $$
+CREATE PROCEDURE ejercicio (id INT, nombre VARCHAR(255), edd INT, salario FLOAT(10,2), salario_min INT)
+BEGIN
+  IF salario >= salario_min THEN INSERT INTO empleados VALUES(id, nombre, edad, salario);
+  ELSE SELECT 'El salario introducido es demasiado bajo';
+  END IF;
+END; $$
+
+DELIMITER ;
