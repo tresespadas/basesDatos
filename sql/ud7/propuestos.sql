@@ -43,4 +43,45 @@ END; $$
 
 DELIMITER ;
 
+/* Ejercicio propuesto: Ejemplo 18 */
+DELIMITER $$
+DROP PROCEDURE IF EXISTS bd.quitar_caja $$
+CREATE PROCEDURE bd.quitar_caja(p.numreferencia INT)
+BEGIN
+  DECLARE codigo INT;
+  SET codigo = (SELECT numreferencia FROM cajas WHERE numreferencia = p.numreferencia)
+  IF codigo IS NOT NULL THEN 
+    DELETE FROM cajas WHERE numreferencia = codigo;
+  ELSE
+    SELECT 'La caja con ese numreferencia no existe. Operación cancelada.' AS 'Alerta';
+  END IF;
+END; $$
 
+DELIMITER ;
+
+/* Ejercicio propuesto: Ejemplo 19 */
+DELIMITER $$
+DROP PROCEDURE IF EXISTS bd.duracion_pelicula $$
+CREATE PROCEDURE bd.duracion_pelicula(p.id_pelicula INT)
+BEGIN
+  DECLARE minutos INT;
+  SET minutos = (SELECT duracion FROM peliculas WHERE codigo = p.id_pelicula)
+  CASE
+    WHEN minutos > 120 THEN SELECT 'Larga duración';
+    WHEN minutos BETWEEN 50 AND 120 THEN SELECT 'Media duración';
+    WHEN minutos < 50 THEN SELECT 'Corta duración';
+    ELSE THEN 'Película no encontrada';
+  END CASE;
+END; $$
+
+DELIMITER ;
+
+/* Ejercicio propuesto: Ejemplo 20 */
+DELIMITER $$
+DROP PROCEDURE IF EXISTS bd.cambio_correo $$
+CREATE PROCEDURE bd.cambio_correo(p.id_cliente INT, p.nuevo_email VARCHAR(255))
+BEGIN
+  UPDATE clientes SET email = p.nuevo_email WHERE id = p.id_cliente;
+END; $$
+
+DELIMITER ;
