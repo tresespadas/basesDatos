@@ -6,7 +6,7 @@ BEGIN
   DECLARE vmes INT; -- Variable id de noticia
   DECLARE lrf BOOL; -- Variable para salir del bucle
 
-  DECLARE cursor1 CURSOR FOR
+  DECLARE cursor1 CURSOR FOR -- ERROR EN EL CURSOR: cursor con condición
   SELECT MONTH(fecha_creacion_cuenta)
   FROM ebanca;
 
