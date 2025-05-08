@@ -55,8 +55,11 @@ BEGIN
 		vtotal_alumnos = vtotal_alumnos + 1;
 	END LOOP bucle1;
 	CLOSE cursor1;
-	
-	INSERT INTO Promedio_calificaciones_curso VALUES (pcurso, vsuma/vtotal_alumnos);
+  
+  IF vtotal_alumnos = 0 THEN
+    SELECT("Curso no encontrado")
+  ELSE 
+    INSERT INTO Promedio_calificaciones_curso VALUES (pcurso, vsuma/vtotal_alumnos);
 
 END; $$
 DELIMITER ;
