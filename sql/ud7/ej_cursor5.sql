@@ -5,7 +5,7 @@ RETURNS INT;
 BEGIN
   DECLARE resultado INT;
 
-  CASE
+  CASE pmes
     WHEN "enero" THEN SET resultado = 1;
     WHEN "febrero" THEN SET resultado = 2;
     WHEN "marzo" THEN SET resultado = 3;

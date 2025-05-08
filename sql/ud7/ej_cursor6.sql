@@ -30,40 +30,33 @@ DELIMITER $$
 DROP PROCEDURE IF EXISTS bd.cursor1 $$
 CREATE PROCEDURE bd.cursor1()
 BEGIN
-  DECLARE venero_total, vfebrero_total, vmarzo_total, vabril_total, vmayo_total, vjunio_total, vjulio_total, vagosto_total, vseptiembre_total, voctubre_total, vnoviembre_total, vdiciembre_total INT; 
+  DECLARE vid, vcada_mes, vtotal_mes INT;
   DECLARE lrf BOOL;
 
   DECLARE cursor1 CURSOR FOR
   SELECT id_cuenta
-  FROM cuentas;
+  FROM cuentas
+  WHERE MONTH(fecha)=vcada_mes;
 
   DECLARE CONTINUE HANDLER FOR NOT FOUND SET lrf=1;
 
-  SET lrf=0, vmes=0;
-  SET venero_total=0, vfebrero_total=0, vmarzo_total=0, vabril_total=0, vmayo_total=0, vjunio_total=0, vjulio_total=0, vagosto_total=0, vseptiembre_total=0, voctubre_total=0, vnoviembre_total=0, vdiciembre_total=0;
-  OPEN cursor1;
-  bucle: LOOP
-    FETCH cursor1 INTO vmes;
-    IF lrf=1 THEN
-      LEAVE bucle;
-    END IF;
-    CASE
-      WHEN (bd.fmes(vmes)) = 1 THEN SET venero_total = venero_total + 1;
-      WHEN (bd.fmes(vmes)) = 2 THEN SET vfebrero_total = vfebrero_total + 1;
-      WHEN (bd.fmes(vmes)) = 3 THEN SET vmarzo_total = vmarzo_total + 1;
-      WHEN (bd.fmes(vmes)) = 4 THEN SET vabril_total = vabril_total + 1;
-      WHEN (bd.fmes(vmes)) = 5 THEN SET vmayo_total = vmayo_total + 1;
-      WHEN (bd.fmes(vmes)) = 6 THEN SET vjunio_total = vjunio_total + 1;
-      WHEN (bd.fmes(vmes)) = 7 THEN SET vjulio_total = vjulio_total + 1;
-      WHEN (bd.fmes(vmes)) = 8 THEN SET vagosto_total = vagosto_total + 1;
-      WHEN (bd.fmes(vmes)) = 9 THEN SET vseptiembre_total = vseptiembre_total + 1;
-      WHEN (bd.fmes(vmes)) = 10 THEN SET voctubre_total = voctubre_total + 1;
-      WHEN (bd.fmes(vmes)) = 11 THEN SET vnoviembre_total = vnoviembre_total + 1;
-      WHEN (bd.fmes(vmes)) = 12 THEN SET vdiciembre_total = vdiciembre_total + 1;
-  END LOOP bucle;
+  SET vcada_mes=1, vid=0, lrf=0;
+  bucle1: WHILE (vcada_mes<=12)
+    SET lrf=0;
+    SET vtotal_cuentas=0;
+    OPEN cursor1;
+    bucle2: LOOP
+      FETCH cursor1 INTO vid;
+      IF lrf=1 THEN
+        LEAVE bucle2;
+      END IF;
+      SET vtotal_cuentas = vtotal_cuentas + 1;
+      END LOOP bucle2;
+  END LOOP bucle2;
+  INSERT INTO cuentas_mes VALUES (vcada_mes, vtotal_cuentas);
+  SET vcada_mes = vcada_mes + 1;
   CLOSE cursor1;
-  
-  INSERT INTO cuentas_mes VALUES (MONTH(vmes), vtotal_cuentas);
+  END WHILE bucle1;
 
 END; $$
 DELIMITER ;
