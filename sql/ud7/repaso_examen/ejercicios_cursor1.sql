@@ -42,7 +42,7 @@ BEGIN
   DECLARE vfecha_apertura DATE;
 
   DECLARE cursor1 CURSOR FOR
-  SELECT id
+  SELECT id, nombre_titular, fecha_apertura
   FROM tabla
   WHERE saldo < 0;
 
