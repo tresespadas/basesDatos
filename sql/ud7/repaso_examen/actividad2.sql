@@ -71,3 +71,43 @@ BEGIN
 END $$
 
 DELIMITER ;
+
+
+-- 5.
+DELIMITER $$
+USE bd_repaso $$
+DROP PROCEDURE IF EXISTS bono_empleado $$
+CREATE PROCEDURE bono_empleado(pid INT)
+BEGIN
+  DECLARE calificacion CHAR(1);
+  SELECT calificacion_rendimiento INTO calificacion
+  FROM Empleados
+  WHERE id_empleado = pid;
+
+  CASE 
+    WHEN calificacion = 'A' THEN 
+      UPDATE Empleados SET bono = 500 WHERE id_empleado = pid;
+    WHEN calificacion = 'B' THEN 
+      UPDATE Empleados SET bono = 250 WHERE id_empleado = pid;
+    WHEN calificacion = 'C' THEN 
+      UPDATE Empleados SET bono = 0 WHERE id_empleado = pid;
+    ELSE THEN SELECT CONCAT ('El id ',pid,' no se encuentra en la base de datos');
+  END CASE;
+END $$
+
+DELIMITER ;
+
+-- 6.
+DELIMITER $$
+USE bd_repaso $$
+DROP PROCEDURE IF EXISTS insertar_empleado $$
+CREATE PROCEDURE insertar_empleado(pid INT, pnombre VARCHAR(20), pedad INT, psalario FLOAT(10,2), psalario_min FLOAT(10,2))
+BEGIN
+  IF psalario < psalario_min THEN 
+    SELECT "El salario no supera el mínimo" AS 'Error';
+  ELSE
+    INSERT INTO empleados VALUES (pid, pnombre, pedad, psalario);
+  END IF;
+END $$
+
+DELIMITER ;
