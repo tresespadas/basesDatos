@@ -71,10 +71,10 @@ DROP PROCEDURE IF EXISTS cuenta_mayor_saldo $$
 CREATE PROCEDURE cuenta_mayor_saldo()
 BEGIN
   DECLARE lrf BOOLEAN;
-  DECLARE vid, vsaldo_max INT;
+  DECLARE vid, vsaldo, vsaldo_max INT;
 
   DECLARE cursor1 FOR
-  SELECT id
+  SELECT id, saldo
   FROM tabla;
 
   DECLARE CONTINUE HANDLER FOR NOT FOUND SET lrf=1;
@@ -83,11 +83,11 @@ BEGIN
 
   OPEN cursor1;
   bucle: LOOP
-    FETCH cursor1 INTO vid;
+    FETCH cursor1 INTO vid, vsaldo
     IF lrf=1 THEN
       LEAVE bucle;
     END IF;
-    IF vid > vsaldo_max THEN
+    IF vsaldo > vsaldo_max THEN
       SET vsaldo_max = vid;
     END IF;
   END LOOP bucle;
