@@ -8,7 +8,7 @@ BEGIN
   DECLARE vid, vnum_mes, vcontador INT;
 
   DECLARE cursor1 CURSOR FOR
-  SELECT id_cuenta INTO vid
+  SELECT id_cuenta
   FROM cuentas
   WHERE MONTH(fecha) = vnum_mes;
 
@@ -46,3 +46,44 @@ END; $$
 
 DELIMITER ;
 
+-- 3.
+DELIMITER $$
+USE bd_repaso $$
+DROP PROCEDURE IF EXISTS contador_meses $$
+CREATE PROCEDURE contador_meses()
+BEGIN
+  DECLARE lrf BOOLEAN;
+  DECLARE vid, vnum_mes, vcontador INT;
+
+  DECLARE cursor1 CURSOR FOR
+  SELECT id_cuenta
+  FROM cuentas
+  WHERE MONTH(fecha) = vnum_mes;
+
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET lrf=1;
+
+  SET lrf=0, vid=0, vnum_mes=1;
+  bucle1: LOOP
+    SET vcontador=0;
+    OPEN cursor1;
+    bucle2: LOOP
+      FETCH cursor1 INTO vid;
+      IF lrf=1 THEN
+        LEAVE bucle2;
+      END IF;
+      SET vcontador = vcontador + 1;
+    END LOOP bucle2;
+    CLOSE cursor1;
+
+    INSERT INTO Cuentas_mes VALUES (vnum_mes, vcontador);
+    SET vnum_mes = vnum_mes + 1;
+    SET lrf = 0;
+    
+    IF vnum_mes > 12 THEN
+      LEAVE bucle1;
+    END IF;
+  END LOOP bucle1;
+
+END; $$
+
+DELIMITER ;

@@ -8,7 +8,7 @@ BEGIN
   DECLARE vid, vcontador INT;
 
   DECLARE cursor1 CURSOR FOR
-  SELECT id INTO vid
+  SELECT id
   FROM tabla
   WHERE MONTH(fecha) = 11;
 
@@ -42,7 +42,7 @@ BEGIN
   DECLARE vfecha_apertura DATE;
 
   DECLARE cursor1 CURSOR FOR
-  SELECT id INTO vid
+  SELECT id
   FROM tabla
   WHERE saldo < 0;
 
@@ -74,7 +74,7 @@ BEGIN
   DECLARE vid, vsaldo_max INT;
 
   DECLARE cursor1 FOR
-  SELECT id INTO vid
+  SELECT id
   FROM tabla;
 
   DECLARE CONTINUE HANDLER FOR NOT FOUND SET lrf=1;
