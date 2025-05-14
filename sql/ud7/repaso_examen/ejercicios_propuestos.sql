@@ -45,4 +45,9 @@ USE bd_repaso $$
 DROP PROCEDURE IF EXISTS añadir_iva $$
 CREATE PROCEDURE añadir_iva
 BEGIN
+  ALTER TABLE productos ADD precio_con_iva FLOAT(10,2);
+  UPDATE productos SET precio_con_iva = precio * 1.21 WHERE tipo = 'textil';
+END $$
+
+DELIMITER ; 
 
