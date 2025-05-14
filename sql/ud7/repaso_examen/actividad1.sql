@@ -54,4 +54,49 @@ DELIMITER ;
 DELIMITER $$
 USE bd_repaso $$
 DROP FUNCTION IF EXISTS mayor_de_tres $$
-CREATE PROCEDURE mayor_de_tres(num1 INT, num2 INT)
+CREATE FUNCTION mayor_de_tres(num1 INT, num2 INT, num3 INT) 
+RETURNS INT
+BEGIN
+  DECLARE resultado INT;
+  IF (num1 > num2 && num1 > num3) THEN
+    SET resultado = num1;
+  ELSEIF (num3 > num2 && num3 > num1) THEN
+    SET resultado = num3;
+  ELSE
+    SET resultado = num2;
+  END IF;
+  RETURN resultado;
+END $$
+
+DELIMITER ;
+
+-- 4.
+DELIMITER $$
+USE bd_repaso $$
+DROP FUNCTION IF EXISTS cuadrado $$
+CREATE FUNCTION cuadrado(num INT)
+RETURNS INT
+BEGIN
+  DECLARE resultado INT;
+  SET resultado = num * num;
+  RETURN resultado;
+END $$
+
+DELIMITER ;
+
+-- 5.
+DELIMITER $$
+USE bd_repaso $$
+DROP PROCEDURE IF EXISTS insertar_persona $$
+CREATE PROCEDURE insertar_persona(nombre VARCHAR(20), edad INT)
+BEGIN
+  IF edad > 18 THEN
+    INSERT INTO adultos VALUES (id, nombre, edad);
+  ELSEIF edad < 18 && edad > 0 THEN
+    INSERT INTO peques VALUES (id, nombre, edad);
+  ELSE
+    SELECT CONCAT(edad,' no es un edad válida') AS 'Error';
+  END IF;
+END $$
+
+DELIMITER ;
