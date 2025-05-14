@@ -59,7 +59,43 @@ BEGIN
     SELECT CONCAT('La cuenta con id ',id,' tiene de nombre titular a ',vnombre_titular,' y se abrió en la fecha ',vfecha_apertura);
   END LOOP bucle;
   CLOSE cursor1;
+END; $$
 
+DELIMITER ;
   
 
+-- 3.
+DELIMITER $$
+USE bd_repaso $$
+DROP PROCEDURE IF EXISTS cuenta_mayor_saldo $$
+CREATE PROCEDURE cuenta_mayor_saldo()
+BEGIN
+  DECLARE lrf BOOLEAN;
+  DECLARE vid, vsaldo_max INT;
 
+  DECLARE cursor1 FOR
+  SELECT id INTO vid
+  FROM tabla;
+
+  DECLARE CONTINUE HANDLER FOR NOT FOUND SET lrf=1;
+
+  SET lrf=0, vid=0, vsaldo_max=0;  
+
+  OPEN cursor1;
+  bucle: LOOP
+    FETCH cursor1 INTO vid;
+    IF lrf=1 THEN
+      LEAVE bucle;
+    END IF;
+    IF vid > vsaldo_max THEN
+      SET vsaldo_max = vid;
+    END IF;
+  END LOOP bucle;
+  CLOSE cursor1;
+
+  SELECT id
+  FROM tabla
+  WHERE saldo = vsaldo_max;
+
+END; $$
+DELIMITER ;
