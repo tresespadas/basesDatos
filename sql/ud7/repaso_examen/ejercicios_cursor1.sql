@@ -1,6 +1,6 @@
 -- 1.
 DELIMITER $$
-USE bd_repaso $$
+USE ebanca $$
 DROP PROCEDURE IF EXISTS cuentas_noviembre $$
 CREATE PROCEDURE cuentas_noviembre()
 BEGIN
@@ -32,7 +32,7 @@ DELIMITER ;
 
 -- 2.
 DELIMITER $$
-USE bd_repaso $$
+USE ebanca $$
 DROP PROCEDURE IF EXISTS cuentas_saldo_negativo $$
 CREATE PROCEDURE IF cuentas_saldo_negativo()
 BEGIN
@@ -66,7 +66,7 @@ DELIMITER ;
 
 -- 3.
 DELIMITER $$
-USE bd_repaso $$
+USE ebanca $$
 DROP PROCEDURE IF EXISTS cuenta_mayor_saldo $$
 CREATE PROCEDURE cuenta_mayor_saldo()
 BEGIN
