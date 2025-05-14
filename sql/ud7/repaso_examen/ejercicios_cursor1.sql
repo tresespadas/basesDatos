@@ -88,7 +88,7 @@ BEGIN
       LEAVE bucle;
     END IF;
     IF vsaldo > vsaldo_max THEN
-      SET vsaldo_max = vid;
+      SET vsaldo_max = vsaldo;
     END IF;
   END LOOP bucle;
   CLOSE cursor1;
