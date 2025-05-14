@@ -31,3 +31,19 @@
 /opt/lampp/bin/mysqldump -u root -p practica1 > dumpeo.sql
 /opt/lampp/bin/mysql -u root -p -e "CREATE DATABASE database_copia_practica1"
 /opt/lampp/bin/mysql -u root -p database_copia_practica1 < dumpeo.sql
+
+# 9.
+
+SELECT * INTO OUTFILE 'dumpeo.txt' FIELDS OPTIONALLY ENCLOSED BY "," LINES TERMINATED BY '\n' FROM clientes;
+
+1	,Pedro,	,Juan,	,Ana,	,Esperanza,	,Madrid,	,Las huertas,	,28001,	,9112345678,
+2	,Garcia,	,Garriga,	,Jacinta,	,847474747,	,Barcelona,	,Diagonal 32,	,08004,	,93456789,
+3	,Rovira,	,Sorlí,	,Galdos,	,949383838,	,Malaga,	,La paz,	,29001,	,67845493,
+4	,Gonzalez,	,Aguirre,	,Rovira,	,123456798,	,Cordoba,	,Julio Romero,	,14001,	,57474747,
+
+# 10.
+
+LOAD DATA INFILE 'dumpeo.txt' IGNORE INTO TABLE clientes FIELDS OPTIONALLY ENCLOSED BY "," LINES TERMINATED BY '\n';
+
+
+
